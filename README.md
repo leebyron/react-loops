@@ -14,30 +14,42 @@ under pressure.
 yarn add react-loops
 ```
 
-## For Loops
+## For-of Loops
 
 Use the props `of` to provide the list and `as` to provide an element for
 each item in the list. The `of` prop accepts Arrays, Array-likes,
 and Iterables.
 
 ```js
-<ul>
-  <For of={myList} as={item =>
-    <li>{item}</li>
-  }/>
-</ul>
+import { For } from 'react-loops'
+
+function Bulleted({ list }) {
+  return (
+    <ul>
+      <For of={list} as={item =>
+        <li>{item}</li>
+      }/>
+    </ul>
+  )
+}
 ```
 
 Or provide a "render prop" function as a child.
 
 ```js
-<ul>
-  <For of={myList}>
-    {item =>
-      <li>{item}</li>
-    }
-  </For>
-</ul>
+import { For } from 'react-loops'
+
+function Bulleted({ list }) {
+  return (
+    <ul>
+      <For of={list}>
+        {item =>
+          <li>{item}</li>
+        }
+      </For>
+    </ul>
+  )
+}
 ```
 
 Access additional information about each iteration by destructuring the
@@ -51,37 +63,60 @@ second argument:
 - `isLast`: True for the last iteration
 
 ```js
-<ul>
-  <For of={myList} as={(item, { isLast }) =>
-    <li><If test={isLast}>and </If>{item}</li>
-  }/>
-</ul>
+import { For } from 'react-loops'
+
+function BulletedSentence({ list }) {
+  return (
+    <ul>
+      <For of={list} as={(item, { isLast }) =>
+        <li>{isLast && "and "}{item}</li>
+      }/>
+    </ul>
+  )
+}
 ```
 
-### For in Loops
+### For-in Loops
 
 Use the prop `in` to provide an Object instead of an Array or Iterable.
 
 ```js
-<ul>
-  <For in={myObj} as={(item, {key}) =>
-    <li>{key}: {item}</li>
-  }/>
-</ul>
+import { For } from 'react-loops'
+
+function BulletedDefinitions({ terms }) {
+  return (
+    <ul>
+      <For in={terms} as={(item, {key}) =>
+        <li>{key}: {item}</li>
+      }/>
+    </ul>
+  )
+}
 ```
 
-### React Keys
+### React Keys & Reorderable Collections
 
-Provide `key` on each child to ensure correct behavior if the list may be
-reordered over time. If you don't provide `key`, the `key` of each
-iteration will be used by default.
+React Loops provides a `key` prop automatically on each child by default (by
+using the `{ key }` looping parameter). This is a great default if your
+collection will not later reorder.
+
+Reorderable collections should directly provide the `key` prop on the element
+returned from the loop callback for correct behavior.
+
+Read more about [Lists and Keys](https://reactjs.org/docs/lists-and-keys.html) in the React documentation.
 
 ```js
-<ul>
-  <For of={myList} as={item =>
-    <li key={item.id}>{item.label}</li>
-  }/>
-</ul>
+import { For } from 'react-loops'
+
+function BulletedReorderable({ list }) {
+  return (
+    <ul>
+      <For of={list} as={item =>
+        <li key={item.id}>{item.label}</li>
+      }/>
+    </ul>
+  )
+}
 ```
 
 
