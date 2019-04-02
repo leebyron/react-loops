@@ -68,6 +68,27 @@ Use the prop `in` to provide an Object instead of an Array or Iterable.
 </ul>
 ```
 
+### C-style for loops
+
+Use the props `initial`, `condition`, and `loop` to have full control over your
+loop, as below:
+
+```js
+<ul>
+  <For initial={0} condition={i => i < 5} loop={i => i + 1}>
+    {i => <li>{i}</li>}
+  </For>
+</ul>
+```
+
+Think of this as you would write a for loop in JavaScript like so:
+
+```js
+for (let i=0; i < 5; i++) {
+  // logic
+}
+```
+
 ### React Keys
 
 Provide `key` on each child to ensure correct behavior if the list may be

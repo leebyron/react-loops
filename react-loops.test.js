@@ -188,18 +188,65 @@ describe("react-loops", () => {
       });
     });
 
+    describe("for-condition", () => {
+      it("loops with int state", () => {
+        expectRenderToEqual(
+          <For initial={0} condition={i => i < 5} loop={i => i + 1}>
+            {i => <li>{i}</li>}
+          </For>,
+          <>
+            <li>0</li>
+            <li>1</li>
+            <li>2</li>
+            <li>3</li>
+            <li>4</li>
+          </>
+        );
+      });
+
+      it("loops with string state", () => {
+        expectRenderToEqual(
+          <For initial={"x"} condition={s => s.length < 5} loop={s => s + "x"}>
+            {s => <li>{s}</li>}
+          </For>,
+          <>
+            <li>x</li>
+            <li>xx</li>
+            <li>xxx</li>
+            <li>xxxx</li>
+          </>
+        );
+      });
+
+      it("loops with object state, doesn't set key", () => {
+        expectRenderToEqual(
+          <For
+            initial={{ x: 0 }}
+            condition={({ x }) => x < 2}
+            loop={({ x }) => ({ x: x + 1 })}
+          >
+            {({ x }) => <li key={`${x}`}>{x}</li>}
+          </For>,
+          <>
+            <li>0</li>
+            <li>1</li>
+          </>
+        );
+      });
+    });
+
     describe("error cases", () => {
-      it("requires either of or in", () => {
+      it("requires, of, in, or condition", () => {
         expectRenderToThrow(
           <For as={() => null} />,
-          "<For> expects either an Iterable `of` or Object `in` prop."
+          "<For> expects an Iterable `of`, Object `in` prop, or Function `condition`."
         );
       });
 
       it("requires only one of of or in", () => {
         expectRenderToThrow(
           <For of={null} in={null} as={() => null} />,
-          "<For> expects either an Iterable `of` or Object `in` prop."
+          "<For> expects an Iterable `of`, Object `in` prop, or Function `condition`."
         );
       });
 
@@ -227,6 +274,13 @@ describe("react-loops", () => {
         expectRenderToThrow(
           <For of={null}>not a func</For>,
           "<For> expects either a render-prop child or a Function `as` prop."
+        );
+      });
+
+      it("requires loop as a function", () => {
+        expectRenderToThrow(
+          <For condition={() => {}} loop={'hello'} as={() => {}} />,
+          "<For> with a `condition` expects both an `initial` value and Function `loop` prop."
         );
       });
     });

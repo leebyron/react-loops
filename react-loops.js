@@ -60,6 +60,23 @@ var iterall = require("iterall");
  *     }/>
  *   </ul>
  *
+ *
+ * *C-style for loops*
+ *
+ * Use the props `initial`, `condition`, and `loop` to have full control over your
+ * loop, as below:
+ *
+ *   <ul>
+ *     <For initial={0} condition={i => i < 5} loop={i => i + 1}>
+ *       {i => <li>{i}</li>}
+ *     </For>
+ *   </ul>
+ *
+ * Think of this as you would write a for loop in JavaScript like so:
+ *
+ *   for (let i=0; i < 5; i++) {
+ *     // logic
+ *   }
  */
 function For(props) {
   // Get the mapping callback
@@ -74,10 +91,15 @@ function For(props) {
   }
 
   var hasIn = props.hasOwnProperty("in");
-  if ((props.hasOwnProperty("of") ^ hasIn) === 0) {
+  var hasCondition = typeof props.condition === "function";
+  if ((props.hasOwnProperty("of") + hasIn + hasCondition) !== 1) {
     throw new TypeError(
-      "<For> expects either an Iterable `of` or Object `in` prop."
+      "<For> expects an Iterable `of`, Object `in` prop, or Function `condition`."
     );
+  }
+
+  if (hasCondition) {
+    return CStyleFor(props, mapper);
   }
 
   if (hasIn) {
@@ -131,6 +153,31 @@ function For(props) {
   return mapped;
 }
 
+function CStyleFor(props, mapper) {
+  var hasInitial = props.hasOwnProperty("initial");
+  var hasLoop = typeof props.loop === "function";
+
+  if (hasInitial + hasLoop !== 2) {
+    throw new TypeError(
+      "<For> with a `condition` expects both an `initial` value and Function `loop` prop."
+    );
+  }
+
+  var initial = hasInitial ? props.initial : null;
+  var condition = props.condition;
+  var loop = props.loop;
+
+  var mapped = [];
+  for (let state = initial; condition(state); state = loop(state)) {
+    var suggestedKey;
+    if (typeof state === 'string' || typeof state === 'number') {
+      suggestedKey = state;
+    }
+    mapped.push(addKey(mapper(state), suggestedKey));
+  }
+  return mapped;
+}
+
 function mapIteration(mapper, item, index, length, key) {
   var itemChildren =
     mapper.length === 1
@@ -142,6 +189,11 @@ function mapIteration(mapper, item, index, length, key) {
           isFirst: index === 0,
           isLast: index === length - 1
         });
+
+  return addKey(itemChildren, key);
+}
+
+function addKey(itemChildren, key) {
   if (React.Children.count(itemChildren) === 1) {
     var child = React.Children.only(itemChildren);
     return child.props.hasOwnProperty("key")
@@ -213,6 +265,13 @@ function Else(props) {
 
 function ElseIf(props) {
   return React.createElement(If, props);
+}
+
+function While(props) {
+  if (!props.hasOwnProperty("case")) {
+    throw new TypeError("<While> requires a `case` prop.");
+  }
+  var condition = Boolean(props.case);
 }
 
 // Export loops
