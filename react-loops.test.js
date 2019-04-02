@@ -57,6 +57,20 @@ describe("react-loops", () => {
         );
       });
 
+      it("loops TypedArray", () => {
+        const list = new Uint8Array(3);
+        list[1] = 10
+        list[2] = 20
+        expectRenderToEqual(
+          <For of={list} as={item => <li>{item}</li>} />,
+          <>
+            <li>{0}</li>
+            <li>{10}</li>
+            <li>{20}</li>
+          </>
+        );
+      });
+
       it("loops an Iterable", () => {
         const list = new Set(["A", "B", "C"]);
         expectRenderToEqual(
