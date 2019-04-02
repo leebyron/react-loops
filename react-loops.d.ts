@@ -45,3 +45,16 @@ export function ElseIf(props: {
 }): React.ReactNode;
 
 export function Else(props: { children: React.ReactNode }): React.ReactNode;
+
+export function Choose(props: {
+  children: When | Otherwise;
+}): React.ReactNode;
+
+export function When(props: {
+  test: any;
+  children: React.ReactNode;
+}): React.ReactNode;
+
+export function Otherwise(props: {
+  children: React.ReactNode;
+}): React.ReactNode;

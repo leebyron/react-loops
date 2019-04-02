@@ -1,6 +1,6 @@
 import React from "react";
 import TestRenderer from "react-test-renderer";
-import { For, If, ElseIf, Else } from "./react-loops.js";
+import { For, If, ElseIf, Else, Choose, When, Otherwise } from "./react-loops.js";
 
 function expectRenderToEqual(actual, expected) {
   expect(TestRenderer.create(actual).toJSON()).toEqual(
@@ -342,6 +342,36 @@ describe("react-loops", () => {
           '<If> only use `else` prop alongside `then` prop.'
         )
       })
+    })
+  });
+
+  describe("choose", () => {
+    it('renders only the first when of which test is truthy', () => {
+      expectRenderToEqual(
+        <Choose>
+          <When test={true !== false}>
+            Truthy?
+          </When>
+          <When test={true === true}>
+            Also Truthy?
+          </When>
+          <Otherwise>Not otherwise</Otherwise>
+        </Choose>
+      , 'Truthy?')
+    })
+
+    it('renders otherwise when no when is truthy', () => {
+      expectRenderToEqual(
+        <Choose>
+          <When test={true !== true}>
+            Falsy?
+          </When>
+          <When test={null}>
+            Falsy?
+          </When>
+          <Otherwise>Otherwise?</Otherwise>
+        </Choose>
+      , 'Otherwise?')
     })
   });
 });

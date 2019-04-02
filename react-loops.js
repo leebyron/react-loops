@@ -215,11 +215,42 @@ function ElseIf(props) {
   return React.createElement(If, props);
 }
 
+function Choose({ children }) {
+  const matchingWhen = React.Children.toArray(children).find((child) => {
+    if (child.type === When && Boolean(child.props.test) === true) {
+      return true;
+    } else {
+      return false;
+    }
+  });
+
+  if (matchingWhen) {
+    return matchingWhen;
+  }
+
+  return (
+    React.Children.toArray(children).find((child) => {
+      return child.type === Otherwise;
+    }) || null
+  );
+};
+
+function When({ children }) {
+  return children;
+};
+
+function Otherwise({ children }) {
+  return children;
+};
+
 // Export loops
 Object.defineProperties(exports, {
   For: { enumerable: true, value: For },
   If: { enumerable: true, value: If },
   Else: { enumerable: true, value: Else },
   ElseIf: { enumerable: true, value: ElseIf },
+  Choose: { enumerable: true, value: Choose },
+  When: { enumerable: true, value: When },
+  Otherwise: { enumerable: true, value: Otherwise },
   __esModule: { value: true }
 });

@@ -121,6 +121,27 @@ Alternatively, you can provide `then` and `else` props.
 }/>
 ```
 
+## Choose conditions
+
+Inspired by XSL this component renders the first `<When>` component
+of which the `test` prop has a _truthy_ value. If no `<When>` component
+has a _truthy_ value the `<Otherwise>` component is rendered instead.
+
+```js
+<Choose>
+  <When test={someCondition}>
+  This will only be shown if someCondition is truthy.
+  </When>
+  <When case={otherCondition}>
+    This will only be shown if someCondition is falsey
+    and otherCondition is truthy.
+  </When>
+  <Otherwise>
+    This will be shown if someCondition and otherCondition are falsey.
+  </Otherwise>
+</Choose>
+```
+
 
 ## What is _React Velcro_?
 

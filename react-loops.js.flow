@@ -28,3 +28,6 @@ declare function For<O: Object>({|
 declare function If({ case: any, children: React$Node }): React$Node;
 declare function ElseIf({ case: any, children: React$Node }): React$Node;
 declare function Else({ children: React$Node }): React$Node;
+declare function Choose({ children: React$Node<typeof When> | React$Node<typeof Otherwise>}): React$Node;
+declare function When({ children: React$Node, test: any }): React$Node;
+declare function Otherwise({ children: React$Node }): React$Node;
