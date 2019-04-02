@@ -8,7 +8,7 @@ React Loops work alongside React Hooks as part of the novel _React Velcro_
 architecture for building sticky, secure user interfaces that don't come apart
 under pressure.
 
-## Get Started with Velcro by installing React Loops!
+## Get started with Velcro by installing React Loops!
 
 ```sh
 yarn add react-loops
