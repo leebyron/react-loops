@@ -33,15 +33,3 @@ export function For<O extends Object, K extends keyof O>(
         children: ForCallback<O[K], K>;
       }
 ): React.ReactNode;
-
-export function If(props: {
-  test: any;
-  children: React.ReactNode;
-}): React.ReactNode;
-
-export function ElseIf(props: {
-  test: any;
-  children: React.ReactNode;
-}): React.ReactNode;
-
-export function Else(props: { children: React.ReactNode }): React.ReactNode;
