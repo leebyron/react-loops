@@ -155,22 +155,22 @@ technologies all have their drawbacks, however we should not abandon all aspects
 of these ideas.
 
 React Loops are not an anti-pattern. `array.forEach()` is not an anti-pattern
-despite the existence of the `for..of` loop so neither should `<For>`. React
+despite the existence of the `for..of` loop and neither is `<For>`. React
 Loops follows React's model of components as encapsulation of behavior and
 state. It uses the "render prop" pattern, like
-[react-router](https://github.com/ReactTraining/react-router)'s  `<Route>` component, itself inspired by XSLT.
+[react-router](https://github.com/ReactTraining/react-router)'s  `<Route>` component, itself reminiscent of XSLT.
 
-React considers Angular (and Vue) style directives anti-patterns not because
+React considers Angular (and Vue) directives as anti-patterns not because
 they emulate loops or control flow. It is because they affect _scope_ in ways
-that removes the ability to use plain Javascript, require a template
-language, and make using other tools like ESLint difficult. They also are
-implemented as attributes (props) which can be used on any element which can
-complicate type-checking and implementation.
+that removes the ability to use plain Javascript, requires a template
+language, and makes using other tools like ESLint difficult. They also are
+implemented as attributes (props) on any element which complicates type-checking
+and implementation.
 
-React Loops avoids both of these drawbacks by providing `<For>` as a specific
-component with a clear signature and uses callback functions to produce each
-element in the collection for clear and "just Javascript" scoping rules which
-avoid the need for template languages or other additional compilation steps.
+React Loops avoids these drawbacks by providing `<For>` as a specific component
+with a clear signature and callback functions to produce each element for clear,
+"just Javascript," scoping rules avoiding the need for template languages or
+additional compilation.
 
 Try React Loops in your project, you just might like it!
 
