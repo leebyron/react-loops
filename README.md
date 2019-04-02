@@ -139,7 +139,7 @@ React Hooks has been an exciting development in the evolution of React, but it
 felt like it was only half of the story. _React Loops_ completes the gripping
 picture by providing React's missing control-flow operators via JSX elements.
 
-The _React Velcro_ architecture was announced by @leebyron on [April 1st, 2019](https://twitter.com/leeb/status/1112867350389219328).
+The _React Velcro_ architecture was announced by [@leebyron](https://github.com/leebyron/) on [April 1st, 2019](https://twitter.com/leeb/status/1112867350389219328).
 
 ### Is this a Joke?
 
