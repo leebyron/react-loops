@@ -1,29 +1,38 @@
 // @flow
 
-type ForCallback<T, K> = (item: T, {
-  index: number,
-  length: number,
-  key: K,
-  isFirst: boolean,
-  isLast: boolean,
-}) => React$Node;
+type ForCallback<T, K> = (
+  item: T,
+  {
+    index: number,
+    length: number,
+    key: K,
+    isFirst: boolean,
+    isLast: boolean
+  }
+) => React$Node;
 
-type ArrayLike<T> = { +length: number, +[number]: T }
+type ArrayLike<T> = { +length: number, +[number]: T };
 
-declare function For<T>({|
-  of: Iterable<T> | ArrayLike<T> | null | void,
-  as: ForCallback<T, number>
-|} | {|
-  of: Iterable<T> | ArrayLike<T> | null | void,
-  children: ForCallback<T, number>
-|}): React$Node;
-declare function For<O: Object>({|
-  in: O | null | void,
-  as: ForCallback<$Values<O>, $Keys<O>>
-|} | {|
-  in: O | null | void,
-  children: ForCallback<$Values<O>, $Keys<O>>
-|}): React$Node;
+declare function For<T>(
+  | {|
+      of: Iterable<T> | ArrayLike<T> | null | void,
+      as: ForCallback<T, number>
+    |}
+  | {|
+      of: Iterable<T> | ArrayLike<T> | null | void,
+      children: ForCallback<T, number>
+    |}
+): React$Node;
+declare function For<O: Object>(
+  | {|
+      in: O | null | void,
+      as: ForCallback<$Values<O>, $Keys<O>>
+    |}
+  | {|
+      in: O | null | void,
+      children: ForCallback<$Values<O>, $Keys<O>>
+    |}
+): React$Node;
 
 declare function If({ case: any, children: React$Node }): React$Node;
 declare function ElseIf({ case: any, children: React$Node }): React$Node;

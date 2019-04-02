@@ -116,11 +116,11 @@ _only_ renders `<ElseIf>` and `<Else>` children.
 Alternatively, you can provide `then` and `else` props.
 
 ```js
-<If case={someCondition} then={
-  "This will only be shown if someCondition is truthy."
-} else={
-  "This will be shown if someCondition is falsey."
-}/>
+<If
+  case={someCondition}
+  then={"This will only be shown if someCondition is truthy."}
+  else={"This will be shown if someCondition is falsey."}
+/>
 ```
 
 

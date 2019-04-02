@@ -59,8 +59,8 @@ describe("react-loops", () => {
 
       it("loops TypedArray", () => {
         const list = new Uint8Array(3);
-        list[1] = 10
-        list[2] = 20
+        list[1] = 10;
+        list[2] = 20;
         expectRenderToEqual(
           <For of={list} as={item => <li>{item}</li>} />,
           <>
@@ -312,50 +312,40 @@ describe("react-loops", () => {
       );
     });
 
-    it('supports then prop', () => {
-      expectRenderToEqual(
-        <If case={1} then={"Truthy?"} />,
-        "Truthy?"
-      )
-      expectRenderToEqual(
-        <If case={0} then={"Truthy?"} />,
-        null
-      )
-    })
+    it("supports then prop", () => {
+      expectRenderToEqual(<If case={1} then={"Truthy?"} />, "Truthy?");
+      expectRenderToEqual(<If case={0} then={"Truthy?"} />, null);
+    });
 
-
-    it('supports then else prop', () => {
+    it("supports then else prop", () => {
       expectRenderToEqual(
         <If case={1} then={"Truthy?"} else={"Falsey?"} />,
         "Truthy?"
-      )
+      );
       expectRenderToEqual(
         <If case={0} then={"Truthy?"} else={"Falsey?"} />,
         "Falsey?"
-      )
-    })
+      );
+    });
 
-    describe('error cases', () => {
-      it('requires case', () => {
-        expectRenderToThrow(
-          <If then={null} />,
-          '<If> requires a `case` prop.'
-        )
-      })
+    describe("error cases", () => {
+      it("requires case", () => {
+        expectRenderToThrow(<If then={null} />, "<If> requires a `case` prop.");
+      });
 
-      it('requires either then or children', () => {
+      it("requires either then or children", () => {
         expectRenderToThrow(
           <If case={1} />,
-          '<If> expects either a `then` prop or children.'
-        )
-      })
+          "<If> expects either a `then` prop or children."
+        );
+      });
 
-      it('requires then when using else', () => {
+      it("requires then when using else", () => {
         expectRenderToThrow(
           <If case={1} else={null} />,
-          '<If> only use `else` prop alongside `then` prop.'
-        )
-      })
-    })
+          "<If> only use `else` prop alongside `then` prop."
+        );
+      });
+    });
   });
 });

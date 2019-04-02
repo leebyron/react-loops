@@ -7,7 +7,8 @@
   "repository": "https://github.com/leebyron/react-loops",
   "license": "MIT",
   "scripts": {
-    "test": "jest"
+    "test": "yarn prettier && jest",
+    "prettier": "prettier --check *.{js,ts,flow}"
   },
   "files": [
     "package.json",
@@ -27,6 +28,7 @@
     "@babel/preset-env": "^7.4.2",
     "@babel/preset-react": "^7.0.0",
     "jest": "^24.5.0",
+    "prettier": "1.16.4",
     "react": "^16.8.6",
     "react-dom": "^16.8.6",
     "react-test-renderer": "^16.8.6"

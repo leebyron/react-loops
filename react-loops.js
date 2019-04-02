@@ -178,11 +178,11 @@ function mapIteration(mapper, item, index, length, key) {
  *
  * Alternatively, you can provide `then` and `else` props.
  *
- *   <If case={someCondition} then={
- *     "This will only be shown if someCondition is truthy."
- *   } else={
- *     "This will be shown if someCondition is falsey."
- *   }/>
+ *  <If
+ *   case={someCondition}
+ *   then={"This will only be shown if someCondition is truthy."}
+ *   else={"This will be shown if someCondition is falsey."}
+ * />
  *
  */
 function If(props) {
