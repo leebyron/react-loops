@@ -27,8 +27,8 @@ var iterall = require("iterall");
  *
  * - `index`: A number from 0 to the length of the list
  * - `length`: The length of the list
- * - `key`: The key for this item in the list. Same as `index` for Arrays
- *          but string properties for `in` Objects
+ * - `key`: The key for this item in the list, same as `index` for Arrays
+ *          but string Object properties for `in` loops
  * - `isFirst`: True for the first iteration
  * - `isLast`: True for the last iteration
  *

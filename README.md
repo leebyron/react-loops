@@ -63,30 +63,6 @@ function Bulleted({ list }) {
 }
 ```
 
-Access additional information about each iteration by destructuring the
-second argument:
-
-- `index`: A number from 0 to the length of the list
-- `length`: The length of the list
-- `key`: The key for this item in the list. Same as `index` for Arrays
-         but string properties for `in` Objects
-- `isFirst`: True for the first iteration
-- `isLast`: True for the last iteration
-
-```js
-import { For } from 'react-loops'
-
-function BulletedSentence({ list }) {
-  return (
-    <ul>
-      <For of={list} as={(item, { isLast }) =>
-        <li>{isLast && "and "}{item}</li>
-      }/>
-    </ul>
-  )
-}
-```
-
 ## For-in Loops
 
 Use the prop `in` to provide an Object instead of an Array or Iterable.
@@ -105,10 +81,36 @@ function BulletedDefinitions({ terms }) {
 }
 ```
 
+## Loop iteration metadata
+
+Access additional information about each iteration by destructuring the
+second callback argument:
+
+- `index`: A number from 0 to the length of the list
+- `length`: The length of the list
+- `key`: The key for this item in the list, same as `index` for Arrays
+         but string Object properties for `in` loops
+- `isFirst`: True for the first iteration
+- `isLast`: True for the last iteration
+
+```js
+import { For } from 'react-loops'
+
+function BulletedSentence({ list }) {
+  return (
+    <ul>
+      <For of={list} as={(item, { isLast }) =>
+        <li>{isLast && "and "}{item}</li>
+      }/>
+    </ul>
+  )
+}
+```
+
 ## React Keys & Reorderable Collections
 
 React Loops provides a `key` prop automatically on each child by default (by
-using the `{ key }` looping parameter). This is a great default if your
+using the `{ key }` loop iteration metadata). This is a great default if your
 collection will not later reorder and an ergonomic improvement over your trained muscle memory of adding `key={i}` to every `list.map()` return value.
 
 However, reorderable collections should still directly provide the `key` prop on
