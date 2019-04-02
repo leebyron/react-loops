@@ -120,45 +120,6 @@ function BulletedReorderable({ list }) {
 ```
 
 
-## If conditions
-
-Use the `test` prop with `<If>` and `<ElseIf>` elements to conditionally
-include certain elements. When an `<If>` test is _truthy_ it does not
-render any `<ElseIf>` or `<Else>` children. However when it is _falsey_ it
-_only_ renders `<ElseIf>` and `<Else>` children.
-
-```js
-<If test={someCondition}>
-  This will only be shown if someCondition is truthy.
-  <ElseIf test={otherCondition}>
-    This will only be shown if someCondition is falsey
-    and otherCondition is truthy.
-    <Else>
-      This will only be shown if both someCondition and
-      otherCondition are both falsey.
-    </Else>
-  </ElseIf>
-  <Else>
-    This will be shown if someCondition is falsey.
-    <If test={finalCondition}>
-      This will be shown if someCondition is falsey
-      and finalCondition is truthy.
-    </If>
-  </Else>
-</If>
-```
-
-Alternatively, you can provide `then` and `else` props.
-
-```js
-<If
-  test={someCondition}
-  then={"This will only be shown if someCondition is truthy."}
-  else={"This will be shown if someCondition is falsey."}
-/>
-```
-
-
 ## What is _React Velcro_?
 
 Only the newest, coolest, most blazing fast React architecture out there!

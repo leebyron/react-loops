@@ -33,7 +33,3 @@ declare function For<O: Object>(
       children: ForCallback<$Values<O>, $Keys<O>>
     |}
 ): React$Node;
-
-declare function If({ test: any, children: React$Node }): React$Node;
-declare function ElseIf({ test: any, children: React$Node }): React$Node;
-declare function Else({ children: React$Node }): React$Node;
