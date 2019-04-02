@@ -3,9 +3,17 @@ import TestRenderer from "react-test-renderer";
 import { For, If, ElseIf, Else } from "./react-loops.js";
 
 function expectRenderToEqual(actual, expected) {
-  expect(TestRenderer.create(actual).toJSON()).toEqual(
-    TestRenderer.create(expected).toJSON()
-  );
+  const consoleError = console.error;
+  try {
+    console.error = message => {
+      throw new Error(message);
+    };
+    expect(TestRenderer.create(actual).toJSON()).toEqual(
+      TestRenderer.create(expected).toJSON()
+    );
+  } finally {
+    console.error = consoleError;
+  }
 }
 
 function expectRenderToThrow(actual, error) {
@@ -87,6 +95,36 @@ describe("react-loops", () => {
         expectRenderToEqual(
           <For of={null} as={item => <li>{item}</li>} />,
           null
+        );
+      });
+
+      it("loops with a non-element string return", () => {
+        const list = ["A", "B", "C"];
+        expectRenderToEqual(
+          <For of={list} as={item => item} />,
+          <>
+            {"A"}
+            {"B"}
+            {"C"}
+          </>
+        );
+      });
+
+      it("loops with a non-element Array return", () => {
+        const list = ["A", "B", "C"];
+        expectRenderToEqual(
+          <For
+            of={list}
+            as={item => [<li key="0">{item}</li>, <li key="1">{item}</li>]}
+          />,
+          <>
+            <li key="woof">A</li>
+            <li>A</li>
+            <li>B</li>
+            <li>B</li>
+            <li>C</li>
+            <li>C</li>
+          </>
         );
       });
 

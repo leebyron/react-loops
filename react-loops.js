@@ -132,7 +132,7 @@ function For(props) {
 }
 
 function mapIteration(mapper, item, index, length, key) {
-  var itemChildren =
+  var result =
     mapper.length === 1
       ? mapper(item)
       : mapper(item, {
@@ -142,13 +142,10 @@ function mapIteration(mapper, item, index, length, key) {
           isFirst: index === 0,
           isLast: index === length - 1
         });
-  if (React.Children.count(itemChildren) === 1) {
-    var child = React.Children.only(itemChildren);
-    return child.props.hasOwnProperty("key")
-      ? child
-      : React.cloneElement(child, { key: key });
+  if (React.isValidElement(result) && !result.props.hasOwnProperty("key")) {
+    return React.cloneElement(result, { key: String(key) });
   }
-  return itemChildren;
+  return result;
 }
 
 /**
