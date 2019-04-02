@@ -10,9 +10,20 @@ under pressure.
 
 ## Get started with Velcro by installing React Loops!
 
+Install with yarn or npm.
+
 ```sh
 yarn add react-loops
 ```
+
+And import into your Javascript.
+
+```js
+import { For } from 'react-loops'
+```
+
+React Loops comes ready with both Flow and TypeScript types for high quality
+integration into codebases that use these tools.
 
 ## For-of Loops
 
@@ -76,7 +87,7 @@ function BulletedSentence({ list }) {
 }
 ```
 
-### For-in Loops
+## For-in Loops
 
 Use the prop `in` to provide an Object instead of an Array or Iterable.
 
@@ -94,7 +105,7 @@ function BulletedDefinitions({ terms }) {
 }
 ```
 
-### React Keys & Reorderable Collections
+## React Keys & Reorderable Collections
 
 React Loops provides a `key` prop automatically on each child by default (by
 using the `{ key }` looping parameter). This is a great default if your
@@ -125,11 +136,47 @@ function BulletedReorderable({ list }) {
 Only the newest, coolest, most blazing fast React architecture out there!
 
 React Hooks has been an exciting development in the evolution of React, but it
-felt like it was only half of the story. React Loops completes the gripping
+felt like it was only half of the story. _React Loops_ completes the gripping
 picture by providing React's missing control-flow operators via JSX elements.
+
+The _React Velcro_ architecture was announced by @leebyron on [April 1st, 2019](https://twitter.com/leeb/status/1112867350389219328).
 
 ### Is this a Joke?
 
 Take a look at this side by side with the old looping pattern and you tell me ([hint](https://media.giphy.com/media/l2SqbYoAwd3KK1wli/giphy.gif)).
 
 <img src="assets/loops-vs-mapkeys.png">
+
+### But isn't this a React anti-pattern? Just go use Angular or Vue?
+
+Yes, React Loops is directly inspired by Angular and Vue. It's also directly
+inspired by older XML component syntax like XSLT, JSTL, and E4X. These
+technologies all have their drawbacks, however we should not abandon all aspects
+of these ideas.
+
+React Loops are not an anti-pattern. `array.forEach()` is not an anti-pattern
+despite the existence of the `for..of` loop so neither should `<For>`. React
+Loops follows React's model of components as encapsulation of behavior and
+state. It also follows existing examples of the "render prop" pattern, such as
+[react-router](https://github.com/ReactTraining/react-router)'s  `<Route>` component, itself inspired by XSLT.
+
+React considers Angular (and Vue) style directives anti-patterns not because
+they emulate loops or control flow. It is because they affect _scope_ in ways
+that removes the ability to use plain Javascript, require a template
+language, and make using other tools like ESLint difficult. They also are
+implemented as attributes (props) which can be used on any element which can
+complicate type-checking and implementation.
+
+React Loops avoids both of these drawbacks by providing `<For>` as a specific
+component with a clear signature and uses callback functions to produce each
+element in the collection for clear and "just Javascript" scoping rules which
+avoid the need for template languages or other additional compilation steps.
+
+Try React Loops in your project, you just might like it!
+
+### Are there any other libraries supporting that _React Velcro_ architecture?
+
+_*Yes*_
+
+* [babel-plugin-jsx-control-statements](https://www.npmjs.com/package/babel-plugin-jsx-control-statements) is a Babel plugin with many control statements.
+  > Its `<For>` component suffers from some of the problems described above, _caveat emptor_.
