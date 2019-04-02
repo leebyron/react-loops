@@ -157,7 +157,7 @@ of these ideas.
 React Loops are not an anti-pattern. `array.forEach()` is not an anti-pattern
 despite the existence of the `for..of` loop so neither should `<For>`. React
 Loops follows React's model of components as encapsulation of behavior and
-state. It also follows existing examples of the "render prop" pattern, such as
+state. It uses the "render prop" pattern, like
 [react-router](https://github.com/ReactTraining/react-router)'s  `<Route>` component, itself inspired by XSLT.
 
 React considers Angular (and Vue) style directives anti-patterns not because
