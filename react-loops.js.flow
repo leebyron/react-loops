@@ -34,6 +34,6 @@ declare function For<O: Object>(
     |}
 ): React$Node;
 
-declare function If({ case: any, children: React$Node }): React$Node;
-declare function ElseIf({ case: any, children: React$Node }): React$Node;
+declare function If({ test: any, children: React$Node }): React$Node;
+declare function ElseIf({ test: any, children: React$Node }): React$Node;
 declare function Else({ children: React$Node }): React$Node;

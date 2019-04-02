@@ -248,16 +248,16 @@ describe("react-loops", () => {
 
   describe("if", () => {
     it("includes children if condition is truthy", () => {
-      expectRenderToEqual(<If case={"truthy"}>Truthy?</If>, "Truthy?");
+      expectRenderToEqual(<If test={"truthy"}>Truthy?</If>, "Truthy?");
     });
 
     it("excludes children if condition is falsey", () => {
-      expectRenderToEqual(<If case={0}>Truthy?</If>, null);
+      expectRenderToEqual(<If test={0}>Truthy?</If>, null);
     });
 
     it("includes Else child if condition is falsey", () => {
       expectRenderToEqual(
-        <If case={0}>
+        <If test={0}>
           Truthy?
           <Else>Falsey?</Else>
         </If>,
@@ -267,7 +267,7 @@ describe("react-loops", () => {
 
     it("excludes Else child if condition is truthy", () => {
       expectRenderToEqual(
-        <If case={1}>
+        <If test={1}>
           Truthy?
           <Else>Falsey?</Else>
         </If>,
@@ -277,9 +277,9 @@ describe("react-loops", () => {
 
     it("evaluates ElseIf child if condition is falsey", () => {
       expectRenderToEqual(
-        <If case={0}>
+        <If test={0}>
           Truthy?
-          <ElseIf case={1}>Otherwise?</ElseIf>
+          <ElseIf test={1}>Otherwise?</ElseIf>
         </If>,
         "Otherwise?"
       );
@@ -287,9 +287,9 @@ describe("react-loops", () => {
 
     it("does not evaluate If child if condition is falsey", () => {
       expectRenderToEqual(
-        <If case={0}>
+        <If test={0}>
           Truthy?
-          <If case={1}>Otherwise?</If>
+          <If test={1}>Otherwise?</If>
         </If>,
         null
       );
@@ -297,9 +297,9 @@ describe("react-loops", () => {
 
     it("allows multiple nested ElseIf and Else cases", () => {
       expectRenderToEqual(
-        <If case={0}>
+        <If test={0}>
           Truthy?
-          <ElseIf case={0}>
+          <ElseIf test={0}>
             Otherwise?
             <Else>Not Otherwise?</Else>
           </ElseIf>
@@ -313,36 +313,41 @@ describe("react-loops", () => {
     });
 
     it("supports then prop", () => {
-      expectRenderToEqual(<If case={1} then={"Truthy?"} />, "Truthy?");
-      expectRenderToEqual(<If case={0} then={"Truthy?"} />, null);
+      expectRenderToEqual(<If test={1} then={"Truthy?"} />, "Truthy?");
+      expectRenderToEqual(<If test={0} then={"Truthy?"} />, null);
     });
 
     it("supports then else prop", () => {
       expectRenderToEqual(
-        <If case={1} then={"Truthy?"} else={"Falsey?"} />,
+        <If test={1} then={"Truthy?"} else={"Falsey?"} />,
         "Truthy?"
       );
       expectRenderToEqual(
-        <If case={0} then={"Truthy?"} else={"Falsey?"} />,
+        <If test={0} then={"Truthy?"} else={"Falsey?"} />,
         "Falsey?"
       );
     });
 
+    it("supports legacy case prop", () => {
+      expectRenderToEqual(<If case={1} then={"Truthy?"} />, "Truthy?");
+      expectRenderToEqual(<If case={0} then={"Truthy?"} />, null);
+    });
+
     describe("error cases", () => {
       it("requires case", () => {
-        expectRenderToThrow(<If then={null} />, "<If> requires a `case` prop.");
+        expectRenderToThrow(<If then={null} />, "<If> requires a `test` prop.");
       });
 
       it("requires either then or children", () => {
         expectRenderToThrow(
-          <If case={1} />,
+          <If test={1} />,
           "<If> expects either a `then` prop or children."
         );
       });
 
       it("requires then when using else", () => {
         expectRenderToThrow(
-          <If case={1} else={null} />,
+          <If test={1} else={null} />,
           "<If> only use `else` prop alongside `then` prop."
         );
       });

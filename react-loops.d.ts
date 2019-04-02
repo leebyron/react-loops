@@ -35,12 +35,12 @@ export function For<O extends Object, K extends keyof O>(
 ): React.ReactNode;
 
 export function If(props: {
-  case: any;
+  test: any;
   children: React.ReactNode;
 }): React.ReactNode;
 
 export function ElseIf(props: {
-  case: any;
+  test: any;
   children: React.ReactNode;
 }): React.ReactNode;
 

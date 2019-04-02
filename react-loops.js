@@ -34,7 +34,7 @@ var iterall = require("iterall");
  *
  *   <ul>
  *     <For of={myList} as={(item, { isLast }) =>
- *       <li><If case={isLast}>and </If>{item}</li>
+ *       <li><If test={isLast}>and </If>{item}</li>
  *     }/>
  *   </ul>
  *
@@ -152,14 +152,14 @@ function mapIteration(mapper, item, index, length, key) {
 }
 
 /**
- * Use the `case` prop with `<If>` and `<ElseIf>` elements to conditionally
- * include certain elements. When an `<If>` case is _truthy_ it does not
+ * Use the `test` prop with `<If>` and `<ElseIf>` elements to conditionally
+ * include certain elements. When an `<If>` test is _truthy_ it does not
  * render any `<ElseIf>` or `<Else>` children. However when it is _falsey_ it
  * _only_ renders `<ElseIf>` and `<Else>` children.
  *
- *   <If case={someCondition}>
+ *   <If test={someCondition}>
  *     This will only be shown if someCondition is truthy.
- *     <ElseIf case={otherCondition}>
+ *     <ElseIf test={otherCondition}>
  *       This will only be shown if someCondition is falsey
  *       and otherCondition is truthy.
  *       <Else>
@@ -169,7 +169,7 @@ function mapIteration(mapper, item, index, length, key) {
  *     </ElseIf>
  *     <Else>
  *       This will be shown if someCondition is falsey.
- *       <If case={finalCondition}>
+ *       <If test={finalCondition}>
  *         This will be shown if someCondition is falsey
  *         and finalCondition is truthy.
  *       </If>
@@ -179,17 +179,18 @@ function mapIteration(mapper, item, index, length, key) {
  * Alternatively, you can provide `then` and `else` props.
  *
  *  <If
- *   case={someCondition}
+ *   test={someCondition}
  *   then={"This will only be shown if someCondition is truthy."}
  *   else={"This will be shown if someCondition is falsey."}
  * />
  *
  */
 function If(props) {
-  if (!props.hasOwnProperty("case")) {
-    throw new TypeError("<If> requires a `case` prop.");
+  var hasTest = props.hasOwnProperty("test");
+  if (!hasTest && !props.hasOwnProperty("case")) {
+    throw new TypeError("<If> requires a `test` prop.");
   }
-  var condition = Boolean(props.case);
+  var condition = Boolean(hasTest ? props.test : props.case);
   var hasElse = props.hasOwnProperty("else");
   var hasThen = props.hasOwnProperty("then");
   if (hasElse && !hasThen) {

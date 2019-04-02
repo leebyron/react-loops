@@ -53,7 +53,7 @@ second argument:
 ```js
 <ul>
   <For of={myList} as={(item, { isLast }) =>
-    <li><If case={isLast}>and </If>{item}</li>
+    <li><If test={isLast}>and </If>{item}</li>
   }/>
 </ul>
 ```
@@ -87,15 +87,15 @@ iteration will be used by default.
 
 ## If conditions
 
-Use the `case` prop with `<If>` and `<ElseIf>` elements to conditionally
-include certain elements. When an `<If>` case is _truthy_ it does not
+Use the `test` prop with `<If>` and `<ElseIf>` elements to conditionally
+include certain elements. When an `<If>` test is _truthy_ it does not
 render any `<ElseIf>` or `<Else>` children. However when it is _falsey_ it
 _only_ renders `<ElseIf>` and `<Else>` children.
 
 ```js
-<If case={someCondition}>
+<If test={someCondition}>
   This will only be shown if someCondition is truthy.
-  <ElseIf case={otherCondition}>
+  <ElseIf test={otherCondition}>
     This will only be shown if someCondition is falsey
     and otherCondition is truthy.
     <Else>
@@ -105,7 +105,7 @@ _only_ renders `<ElseIf>` and `<Else>` children.
   </ElseIf>
   <Else>
     This will be shown if someCondition is falsey.
-    <If case={finalCondition}>
+    <If test={finalCondition}>
       This will be shown if someCondition is falsey
       and finalCondition is truthy.
     </If>
@@ -117,7 +117,7 @@ Alternatively, you can provide `then` and `else` props.
 
 ```js
 <If
-  case={someCondition}
+  test={someCondition}
   then={"This will only be shown if someCondition is truthy."}
   else={"This will be shown if someCondition is falsey."}
 />
