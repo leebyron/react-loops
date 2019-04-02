@@ -109,12 +109,10 @@ function BulletedDefinitions({ terms }) {
 
 React Loops provides a `key` prop automatically on each child by default (by
 using the `{ key }` looping parameter). This is a great default if your
-collection will not later reorder.
+collection will not later reorder and an ergonomic improvement over your trained muscle memory of adding `key={i}` to every `list.map()` return value.
 
-Reorderable collections should directly provide the `key` prop on the element
-returned from the loop callback for correct behavior.
-
-Read more about [Lists and Keys](https://reactjs.org/docs/lists-and-keys.html) in the React documentation.
+However, reorderable collections should still directly provide the `key` prop on
+the element returned from the loop callback. Read more about [Lists and Keys](https://reactjs.org/docs/lists-and-keys.html) in the React documentation.
 
 ```js
 import { For } from 'react-loops'
