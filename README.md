@@ -2,6 +2,8 @@
 
 # React Loops — _React Velcro Architecture_
 
+[![Build Status](https://travis-ci.com/leebyron/react-loops.svg?branch=master)](https://travis-ci.com/leebyron/react-loops)
+
 React Loops work alongside React Hooks as part of the novel _React Velcro_
 architecture for building sticky, secure user interfaces that don't come apart
 under pressure.
@@ -129,3 +131,9 @@ Only the newest, coolest, most blazing fast React architecture out there!
 React Hooks has been an exciting development in the evolution of React, but it
 felt like it was only half of the story. React Loops completes the gripping
 picture by providing React's missing control-flow operators via JSX elements.
+
+### Is this a Joke?
+
+Take a look at this side by side with the old looping pattern and you tell me.
+
+<img src="assets/loops-vs-mapkeys.png">
