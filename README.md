@@ -133,3 +133,5 @@ picture by providing React's missing control-flow operators via JSX elements.
 Take a look at this side by side with the old looping pattern and you tell me.
 
 <img src="assets/loops-vs-mapkeys.png">
+
+![Hint: I'm serious](https://media.giphy.com/media/l2SqbYoAwd3KK1wli/giphy.gif)
