@@ -1,6 +1,6 @@
 <img align="right" src="assets/hook-and-loop.gif">
 
-# React Loops — _React Veclro Architecture_
+# React Loops — _React Velcro Architecture_
 
 React Loops work alongside React Hooks as part of the novel _React Velcro_
 architecture for building sticky, secure user interfaces that don't come apart
