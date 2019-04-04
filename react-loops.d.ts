@@ -22,7 +22,7 @@ export function For<T>(
         children: ForCallback<T, number>;
       }
 ): React.ReactNode;
-export function For<O extends object, K extends keyof O>(
+export function For<O extends {}, K extends keyof O>(
   props:
     | {
         in: O | null | undefined;
