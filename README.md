@@ -182,3 +182,4 @@ _*Yes*_
 
 * [babel-plugin-jsx-control-statements](https://www.npmjs.com/package/babel-plugin-jsx-control-statements) is a Babel plugin with many control statements.
   > Its `<For>` component suffers from some of the problems described above, _caveat emptor_.
+* [react-for](https://github.com/MJez29/react-for) is a predecessor and a very similar idea which includes other variants of loops.
