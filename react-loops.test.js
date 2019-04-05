@@ -89,7 +89,15 @@ describe("react-loops", () => {
         </>
       );
     });
-
+    it("loops fallback", () => {
+      const list = [];
+      expectRenderToEqual(
+        <For of={list} fallback={() => <div>fallback UI</div>}>
+          {item => <li>{item}</li>}
+        </For>,
+        <div>fallback UI</div>
+      );
+    });
     it("loops null", () => {
       expectRenderToEqual(<For of={null} as={item => <li>{item}</li>} />, null);
     });

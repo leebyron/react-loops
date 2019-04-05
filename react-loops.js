@@ -60,6 +60,16 @@ var iterall = require("iterall");
  *     }/>
  *   </ul>
  *
+ * * fallback in Loops*
+ * use the prop `fallback` to provide an fallback component, when we got a empty list.
+ * 
+ *   <ul>
+ *     <For of={myList}  fallback={_ => <div>fallback UI</div>}>
+ *       {item =>
+ *         <li>{item}</li>
+ *       }
+ *     </For>
+ *   </ul>
  */
 function For(props) {
   // Get the mapping callback
@@ -79,19 +89,28 @@ function For(props) {
       "<For> expects either an Iterable `of` or Object `in` prop."
     );
   }
-
+  var hasFallback = props.hasOwnProperty('fallback');
+  if(hasFallback) {
+    var fallback = props.fallback;
+  }
   if (hasIn) {
     // Get the object
     var obj = props.in;
 
     // Accept null / falsey as nothing to loop.
     if (!obj) {
+      console.warn(
+        "<For> `in` expects an Array, Array-like, or Iterable collection, but we got null / falsey as nothing"
+      );
       return null;
     }
 
     // Map each object property into a React child, provide additional info if requested
     var keys = Object.keys(obj);
     var length = keys.length;
+    if(length === 0 && hasFallback) {
+      return fallback;
+    }
     var mapped = [];
     for (let i = 0; i < length; i++) {
       var key = keys[i];
@@ -105,6 +124,9 @@ function For(props) {
 
   // Accept null / falsey as nothing to loop.
   if (!list) {
+    console.warn(
+      "<For> `of` expects an Array, Array-like, or Iterable collection, but we got null / falsey as nothing"
+    );
     return null;
   }
 
@@ -114,6 +136,9 @@ function For(props) {
       throw new TypeError(
         "<For> `of` expects an Array, Array-like, or Iterable collection"
       );
+    }
+    if(list.length === 0 && fallback) {
+      return fallback;
     }
     var array = [];
     iterall.forEach(list, function(item) {
