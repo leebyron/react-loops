@@ -184,3 +184,35 @@ _*Yes*_
   > Its `<For>` component suffers from some of the problems described above, _caveat emptor_.
 * [react-for](https://github.com/MJez29/react-for) is a predecessor and a very similar idea which includes other variants of loops.
 * [react-listable](https://github.com/victorvoid/react-listable) is a predecessor of this idea which includes `<ol>` and `<ul>` components.
+
+## Contributing & License
+
+Contributions are welcome from all who follow the community
+[code of conduct](https://www.contributor-covenant.org/version/1/4/code-of-conduct).
+
+  1. [Fork](https://guides.github.com/activities/forking/) this repository
+  2. `yarn install`
+  3. Make your change in a [branch](https://help.github.com/en/articles/about-branches)
+  4. `yarn test`
+  5. Create a [pull request](https://help.github.com/en/articles/creating-a-pull-request-from-a-fork)
+
+### React Loops is provided under the MIT license:
+
+Copyright 2019 Lee Byron
+
+Permission is hereby granted, free of charge, to any person obtaining a copy of
+this software and associated documentation files (the "Software"), to deal in
+the Software without restriction, including without limitation the rights to
+use, copy, modify, merge, publish, distribute, sublicense, and/or sell copies of
+the Software, and to permit persons to whom the Software is furnished to do so,
+subject to the following conditions:
+
+The above copyright notice and this permission notice shall be included in all
+copies or substantial portions of the Software.
+
+THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY, FITNESS
+FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE AUTHORS OR
+COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER
+IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN
+CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
