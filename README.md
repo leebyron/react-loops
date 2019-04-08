@@ -2,7 +2,7 @@
 
 # React Loops — _React Velcro Architecture_
 
-[![Build Status](https://travis-ci.com/leebyron/react-loops.svg?branch=master)](https://travis-ci.com/leebyron/react-loops)
+[![Build Status](https://travis-ci.com/leebyron/react-loops.svg?branch=master)](https://travis-ci.com/leebyron/react-loops) [![Coverage Status](https://coveralls.io/repos/github/leebyron/react-loops/badge.svg?branch=master)](https://coveralls.io/github/leebyron/react-loops?branch=master)
 
 React Loops work alongside React Hooks as part of the novel _React Velcro_
 architecture for building sticky, secure user interfaces that don't come apart

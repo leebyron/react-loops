@@ -7,8 +7,8 @@
   "repository": "https://github.com/leebyron/react-loops",
   "license": "MIT",
   "scripts": {
-    "test": "yarn prettier && jest",
-    "prettier": "prettier --check *.{js,ts,flow}"
+    "ci": "prettier --check *.{js,ts,flow} && jest --coverage --coverageReporters=text-lcov | coveralls",
+    "test": "prettier --write *.{js,ts,flow} && jest --coverage --coverageReporters=text"
   },
   "files": [
     "package.json",
@@ -27,6 +27,7 @@
     "@babel/core": "^7.4.0",
     "@babel/preset-env": "^7.4.2",
     "@babel/preset-react": "^7.0.0",
+    "coveralls": "^3.0.3",
     "jest": "^24.5.0",
     "prettier": "1.16.4",
     "react": "^16.8.6",
