@@ -193,8 +193,10 @@ Contributions are welcome from all who follow the community
   1. [Fork](https://guides.github.com/activities/forking/) this repository
   2. `yarn install`
   3. Make your change in a [branch](https://help.github.com/en/articles/about-branches)
-  4. `yarn test`
-  5. Create a [pull request](https://help.github.com/en/articles/creating-a-pull-request-from-a-fork)
+  4. Ensure your change includes any relevant tests, type definitions
+     (TypeScript and Flow), and documentation.
+  5. `yarn test`
+  6. Create a [pull request](https://help.github.com/en/articles/creating-a-pull-request-from-a-fork)
 
 ### React Loops is provided under the MIT license:
 
