@@ -170,6 +170,39 @@ describe("react-loops", () => {
     });
   });
 
+  it("loops an IterableIterator with metadata", () => {
+    const list = new Map([["x", "A"], ["y", "B"], ["z", "C"]]);
+    expectRenderToEqual(
+      <For
+        of={list.keys()}
+        as={(key, { index, length }) => (
+          <li>
+            {key}
+            {index}
+            {length}
+          </li>
+        )}
+      />,
+      <>
+        <li>
+          {"x"}
+          {0}
+          {3}
+        </li>
+        <li>
+          {"y"}
+          {1}
+          {3}
+        </li>
+        <li>
+          {"z"}
+          {2}
+          {3}
+        </li>
+      </>
+    );
+  });
+
   describe("for-in", () => {
     it("loops an Object", () => {
       const obj = { x: "A", y: "B", z: "C" };
@@ -179,6 +212,35 @@ describe("react-loops", () => {
           <li>A</li>
           <li>B</li>
           <li>C</li>
+        </>
+      );
+    });
+
+    it("loops an almost-array-like", () => {
+      const anAlmostArrayLike = { 0: "A", 1: "B", 2: "C" };
+      expectRenderToEqual(
+        <For
+          in={anAlmostArrayLike}
+          as={(item, { key }) => (
+            <li>
+              {item}
+              {key}
+            </li>
+          )}
+        />,
+        <>
+          <li>
+            {"A"}
+            {"0"}
+          </li>
+          <li>
+            {"B"}
+            {"1"}
+          </li>
+          <li>
+            {"C"}
+            {"2"}
+          </li>
         </>
       );
     });
@@ -237,14 +299,14 @@ describe("react-loops", () => {
     it("requires either of or in", () => {
       expectRenderToThrow(
         <For as={() => null} />,
-        "<For> expects either an Iterable `of` or Object `in` prop."
+        "<For> expects either a Collection `of` or Object `in` prop."
       );
     });
 
     it("requires only one of of or in", () => {
       expectRenderToThrow(
         <For of={null} in={null} as={() => null} />,
-        "<For> expects either an Iterable `of` or Object `in` prop."
+        "<For> expects either a Collection `of` or Object `in` prop."
       );
     });
 
@@ -272,6 +334,42 @@ describe("react-loops", () => {
       expectRenderToThrow(
         <For of={null}>not a func</For>,
         "<For> expects either a render-prop child or a Function `as` prop."
+      );
+    });
+
+    it("requires a collection in for-of loops", () => {
+      const notACollection = { x: "A" };
+      expectRenderToThrow(
+        <For of={notACollection} as={() => null} />,
+        "<For of={}> expects an Array, Array-like, or Iterable collection. " +
+          "Perhaps you meant to use <For in={}> with an Object?"
+      );
+    });
+
+    it("requires a non-collection object in for-in loops", () => {
+      const anArray = ["A", "B", "C"];
+      const anIterable = new Set(["A", "B", "C"]);
+      const anArrayLike = { length: 3, 0: "A", 1: "B", 2: "C" };
+      const aFunction = () => ["A", "B", "C"];
+      expectRenderToThrow(
+        <For in={anArray} as={() => null} />,
+        "<For in={}> expects a non-collection Object. " +
+          "Perhaps you meant to use <For of={}> with a Collection?"
+      );
+      expectRenderToThrow(
+        <For in={anIterable} as={() => null} />,
+        "<For in={}> expects a non-collection Object. " +
+          "Perhaps you meant to use <For of={}> with a Collection?"
+      );
+      expectRenderToThrow(
+        <For in={anArrayLike} as={() => null} />,
+        "<For in={}> expects a non-collection Object. " +
+          "Perhaps you meant to use <For of={}> with a Collection?"
+      );
+      expectRenderToThrow(
+        <For in={aFunction} as={() => null} />,
+        "<For in={}> expects a non-collection Object. " +
+          "Perhaps you meant to use <For of={}> with a Collection?"
       );
     });
   });

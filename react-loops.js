@@ -76,7 +76,7 @@ function For(props) {
   var hasIn = props.hasOwnProperty("in");
   if ((props.hasOwnProperty("of") ^ hasIn) === 0) {
     throw new TypeError(
-      "<For> expects either an Iterable `of` or Object `in` prop."
+      "<For> expects either a Collection `of` or Object `in` prop."
     );
   }
 
@@ -87,6 +87,13 @@ function For(props) {
     // Accept null / falsey as nothing to loop.
     if (!obj) {
       return null;
+    }
+
+    if (iterall.isCollection(obj) || typeof obj !== "object") {
+      throw new TypeError(
+        "<For in={}> expects a non-collection Object. " +
+          "Perhaps you meant to use <For of={}> with a Collection?"
+      );
     }
 
     // Map each object property into a React child, provide additional info if requested
@@ -112,7 +119,8 @@ function For(props) {
   if (!Array.isArray(list)) {
     if (!iterall.isCollection(list)) {
       throw new TypeError(
-        "<For> `of` expects an Array, Array-like, or Iterable collection"
+        "<For of={}> expects an Array, Array-like, or Iterable collection. " +
+          "Perhaps you meant to use <For in={}> with an Object?"
       );
     }
     var array = [];
