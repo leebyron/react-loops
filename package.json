@@ -1,6 +1,6 @@
 {
   "name": "react-loops",
-  "version": "1.2.1",
+  "version": "1.3.0",
   "description": "React Loops work with React Hooks as part of the React Velcro architecture",
   "main": "react-loops.js",
   "types": "react-loops.d.ts",
