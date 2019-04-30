@@ -100,7 +100,7 @@ function For(props) {
     var keys = Object.keys(obj);
     var length = keys.length;
     var mapped = [];
-    for (let i = 0; i < length; i++) {
+    for (var i = 0; i < length; i++) {
       var key = keys[i];
       mapped.push(mapIteration(mapper, obj[key], i, length, key));
     }
@@ -133,7 +133,7 @@ function For(props) {
   // Map each list item into a React child, provide additional info if requested
   var length = list.length;
   var mapped = [];
-  for (let i = 0; i < length; i++) {
+  for (var i = 0; i < length; i++) {
     mapped.push(mapIteration(mapper, list[i], i, length, i));
   }
   return mapped;
