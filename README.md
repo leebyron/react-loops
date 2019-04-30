@@ -31,7 +31,11 @@ integration into codebases that use these tools.
 
 Use the props `of` to provide the list and `as` to provide an element for
 each item in the list. The `of` prop accepts Arrays, Array-likes,
-and Iterables.
+and Iterables (such as [`Map`], [`Set`], and [Immutable.js]).
+
+[`Map`]: https://developer.mozilla.org/en/docs/Web/JavaScript/Reference/Global_Objects/Map
+[`Set`]: https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Set
+[Immutable.js]: https://immutable-js.github.io/immutable-js/
 
 ```js
 import { For } from 'react-loops'
