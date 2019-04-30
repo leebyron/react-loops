@@ -87,6 +87,31 @@ function BulletedDefinitions({ terms }) {
 }
 ```
 
+## Loop empty conditions
+
+A common pattern when rendering a collection is to render a special case when
+the collection is empty. Optionally provide an `ifEmpty` prop to handle this
+case for both `<For in>` and `<For of>` loops.
+
+The `ifEmpty` prop accepts anything renderable (strings, numbers, JSX) or a
+*function* which returns anything renderable.
+
+```js
+import { For } from 'react-loops'
+
+function BulletedWithFallback({ list }) {
+  return (
+     <ul>
+      <For of={list} ifEmpty={<em>Nothing here!</em>}>
+        {item =>
+          <li>{item}</li>
+        }
+      </For>
+    </ul>
+  )
+}
+```
+
 ## Loop iteration metadata
 
 Access additional information about each iteration by destructuring the

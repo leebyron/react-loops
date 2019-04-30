@@ -16,20 +16,24 @@ type ArrayLike<T> = { +length: number, +[number]: T };
 declare function For<T>(
   | {|
       of: Iterable<T> | ArrayLike<T> | null | void,
+      ifEmpty?: (() => React$Node) | React$Node,
       as: ForCallback<T, number>
     |}
   | {|
       of: Iterable<T> | ArrayLike<T> | null | void,
+      ifEmpty?: (() => React$Node) | React$Node,
       children: ForCallback<T, number>
     |}
 ): React$Node;
 declare function For<O: Object>(
   | {|
       in: O | null | void,
+      ifEmpty?: (() => React$Node) | React$Node,
       as: ForCallback<$Values<O>, $Keys<O>>
     |}
   | {|
       in: O | null | void,
+      ifEmpty?: (() => React$Node) | React$Node,
       children: ForCallback<$Values<O>, $Keys<O>>
     |}
 ): React$Node;
