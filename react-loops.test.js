@@ -168,39 +168,96 @@ describe("react-loops", () => {
         </>
       );
     });
-  });
 
-  it("loops an IterableIterator with metadata", () => {
-    const list = new Map([["x", "A"], ["y", "B"], ["z", "C"]]);
-    expectRenderToEqual(
-      <For
-        of={list.keys()}
-        as={(key, { index, length }) => (
+    it("loops an IterableIterator with metadata", () => {
+      const list = new Map([["x", "A"], ["y", "B"], ["z", "C"]]);
+      expectRenderToEqual(
+        <For
+          of={list.keys()}
+          as={(key, { index, length }) => (
+            <li>
+              {key}
+              {index}
+              {length}
+            </li>
+          )}
+        />,
+        <>
           <li>
-            {key}
-            {index}
-            {length}
+            {"x"}
+            {0}
+            {3}
           </li>
-        )}
-      />,
-      <>
-        <li>
-          {"x"}
-          {0}
-          {3}
-        </li>
-        <li>
-          {"y"}
-          {1}
-          {3}
-        </li>
-        <li>
-          {"z"}
-          {2}
-          {3}
-        </li>
-      </>
-    );
+          <li>
+            {"y"}
+            {1}
+            {3}
+          </li>
+          <li>
+            {"z"}
+            {2}
+            {3}
+          </li>
+        </>
+      );
+    });
+
+    describe("ifEmpty", () => {
+      it("is used with an empty Array", () => {
+        const list = [];
+        expectRenderToEqual(
+          <For
+            of={list}
+            as={item => <li>{item}</li>}
+            ifEmpty={<b>Nothing here</b>}
+          />,
+          <>
+            <b>Nothing here</b>
+          </>
+        );
+      });
+
+      it("allows a lazy function", () => {
+        const list = [];
+        expectRenderToEqual(
+          <For
+            of={list}
+            as={item => <li>{item}</li>}
+            ifEmpty={() => <b>Nothing here</b>}
+          />,
+          <>
+            <b>Nothing here</b>
+          </>
+        );
+      });
+
+      it("is used with null", () => {
+        expectRenderToEqual(
+          <For
+            of={null}
+            as={item => <li>{item}</li>}
+            ifEmpty={<b>Nothing here</b>}
+          />,
+          <>
+            <b>Nothing here</b>
+          </>
+        );
+      });
+
+      it("is used with an empty iterable", () => {
+        const set = new Set();
+        expectRenderToEqual(
+          <For
+            of={set}
+            as={item => <li>{item}</li>}
+            ifEmpty={<b>Nothing here</b>}
+          />,
+          <>
+            <b>Nothing here</b>
+          </>
+        );
+      });
+    });
   });
 
   describe("for-in", () => {
@@ -292,6 +349,49 @@ describe("react-loops", () => {
           </li>
         </>
       );
+    });
+
+    describe("ifEmpty", () => {
+      it("is used with an empty Object", () => {
+        const obj = {};
+        expectRenderToEqual(
+          <For
+            in={obj}
+            as={item => <li>{item}</li>}
+            ifEmpty={<b>Nothing here</b>}
+          />,
+          <>
+            <b>Nothing here</b>
+          </>
+        );
+      });
+
+      it("allows a lazy function", () => {
+        const obj = {};
+        expectRenderToEqual(
+          <For
+            in={obj}
+            as={item => <li>{item}</li>}
+            ifEmpty={() => <b>Nothing here</b>}
+          />,
+          <>
+            <b>Nothing here</b>
+          </>
+        );
+      });
+
+      it("is used with null", () => {
+        expectRenderToEqual(
+          <For
+            in={null}
+            as={item => <li>{item}</li>}
+            ifEmpty={<b>Nothing here</b>}
+          />,
+          <>
+            <b>Nothing here</b>
+          </>
+        );
+      });
     });
   });
 

@@ -38,6 +38,16 @@ var iterall = require("iterall");
  *     }/>
  *   </ul>
  *
+ * You can also optionally provide a fallback rendering with the `ifEmpty` prop:
+ *
+ *   <ul>
+ *     <For
+ *       of={myList}
+ *       as={item => <li>{item}</li>
+ *       ifEmpty={<b>No more items!</b>}
+ *     />
+ *   </ul>
+ *
  * *For in Loops*
  *
  * Use the prop `in` to provide an Object instead of an Array or Iterable.
@@ -86,7 +96,7 @@ function For(props) {
 
     // Accept null / falsey as nothing to loop.
     if (!obj) {
-      return null;
+      return renderEmpty(props);
     }
 
     if (iterall.isCollection(obj) || typeof obj !== "object") {
@@ -96,9 +106,14 @@ function For(props) {
       );
     }
 
-    // Map each object property into a React child, provide additional info if requested
+    // Get the set of keys, rendering as empty if there are no keys.
     var keys = Object.keys(obj);
     var length = keys.length;
+    if (length === 0) {
+      return renderEmpty(props);
+    }
+
+    // Map each object property key into a React child.
     var mapped = [];
     for (var i = 0; i < length; i++) {
       var key = keys[i];
@@ -112,7 +127,7 @@ function For(props) {
 
   // Accept null / falsey as nothing to loop.
   if (!list) {
-    return null;
+    return renderEmpty(props);
   }
 
   // Convert non-Array collections to an Array.
@@ -130,8 +145,13 @@ function For(props) {
     list = array;
   }
 
-  // Map each list item into a React child, provide additional info if requested
+  // Get the length of the list, rendering as empty if 0.
   var length = list.length;
+  if (length === 0) {
+    return renderEmpty(props);
+  }
+
+  // Map each list item into a React child.
   var mapped = [];
   for (var i = 0; i < length; i++) {
     mapped.push(mapIteration(mapper, list[i], i, length, i));
@@ -140,6 +160,8 @@ function For(props) {
 }
 
 function mapIteration(mapper, item, index, length, key) {
+  // Map this item into a React child node.
+  // Produce additional info only if the mapper expects it.
   var result =
     mapper.length === 1
       ? mapper(item)
@@ -150,10 +172,23 @@ function mapIteration(mapper, item, index, length, key) {
           isFirst: index === 0,
           isLast: index === length - 1
         });
+  // If the response is an element without a key property, add it automatically
+  // by using the iteration key.
   if (React.isValidElement(result) && !result.props.hasOwnProperty("key")) {
     return React.cloneElement(result, { key: String(key) });
   }
   return result;
+}
+
+function renderEmpty(props) {
+  // If the collection was non-existent or empty, render the empty condition
+  // if it exists, otherwise render null.
+  if (!props.hasOwnProperty("ifEmpty")) {
+    return null;
+  }
+
+  var ifEmpty = props.ifEmpty;
+  return typeof ifEmpty === "function" ? ifEmpty() : ifEmpty;
 }
 
 // Export loops
