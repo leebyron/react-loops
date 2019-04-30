@@ -1,4 +1,5 @@
-///<reference types="react"/>
+type JSXNode = JSX.Element | string | number | false | null | undefined;
+type JSXChild = JSXNode | Array<JSXNode>
 
 type ForCallback<T, K> = (
   item: T,
@@ -9,7 +10,7 @@ type ForCallback<T, K> = (
     isFirst: boolean;
     isLast: boolean;
   }
-) => React.ReactNode;
+) => JSXChild;
 
 export function For<T>(
   props:
@@ -21,7 +22,7 @@ export function For<T>(
         of: Iterable<T> | ArrayLike<T> | null | undefined;
         children: ForCallback<T, number>;
       }
-): React.ReactNode;
+): JSX.Element;
 export function For<O extends {}, K extends keyof O>(
   props:
     | {
@@ -32,4 +33,4 @@ export function For<O extends {}, K extends keyof O>(
         in: O | null | undefined;
         children: ForCallback<O[K], K>;
       }
-): React.ReactNode;
+): JSX.Element;
